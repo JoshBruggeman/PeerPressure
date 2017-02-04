@@ -1,0 +1,33 @@
+{
+  "name": "peer-pressure",
+  "version": "1.0.0",
+  "description": "an event application using Node, Express, Sequelize, and the latest CSS Frameworks. ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshBruggeman/PeerPressure.git"
+  },
+  "keywords": [
+    "Node",
+    "Sequelize",
+    "CSS",
+    "Express"
+  ],
+  "author": "Bruggeman, Holowicki, Rosenberg, Naik",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoshBruggeman/PeerPressure/issues"
+  },
+  "homepage": "https://github.com/JoshBruggeman/PeerPressure#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.1",
+    "mysql": "^2.13.0",
+    "path": "^0.12.7",
+    "sequelize": "^3.30.1"
+  }
+}
