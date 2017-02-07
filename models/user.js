@@ -25,3 +25,9 @@ module.exports = function(sequelize, DataTypes) {
     User.validPassword = function(user, password) {
         return bcrypt.compareSync(password, user.password);
     };
+
+
+
+
+    return User;
+}
