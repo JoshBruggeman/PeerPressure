@@ -20,5 +20,8 @@ module.exports = function(sequelize, DataTypes) {
     }
   }//classMethods
 );
+
+sequelize.sync({force: true});
   return BucketItem;
+
 }

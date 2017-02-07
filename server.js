@@ -35,7 +35,7 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars"); // set up ejs for templating
 
 // required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(session({ secret: 'anything' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
@@ -58,8 +58,7 @@ require('./routes/user-api-route.js')(app, passport); // load our routes and pas
 // require("./routes/bucketlist-api-route.js")(app);
 
 // Syncing our sequelize models and then starting our express app
-db.sequelize.sync({ force: true }).then(function() {
+
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
-});
