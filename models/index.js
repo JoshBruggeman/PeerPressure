@@ -3,16 +3,17 @@
 var fs        = require('fs');
 var path      = require('path');
 var Sequelize = require('sequelize');
-var basename  = path.basename(module.filename);
+var  basename  = path.basename(module.filename)
 var env       = process.env.NODE_ENV || 'development';
-var config    = require(__dirname + '/../config/config.json')[env];
-var db        = {};
 
+var db        = {};
+var config    = require(__dirname + '/../config/config.json')[env];
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
   var sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+
 
 fs
   .readdirSync(__dirname) //looking at the current directory or the specified "_dirname"
@@ -32,5 +33,4 @@ Object.keys(db).forEach(function(modelName) {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-
 module.exports = db;

@@ -1,29 +1,22 @@
+var bcrypt   = require('bcrypt-nodejs');
 module.exports = function(sequelize, DataTypes) {
-  var User = sequelize.define("User", {
-    // Giving the User model a name of type STRING
-    username: DataTypes.STRING,
-    id: {
-              type: Datatypes.INTEGER,
-              timestamps: true,
-              autoIncrement: true,
-              primaryKey: true
-          }
-  }
-  },
-    // Here we'll pass a second "classMethods" object into the define method
-    // This is for any additional configuration we want to give our models
-    {
-      // We're saying that we want our Author to have Posts
-      classMethods: {
-        associate: function(models) {
-          // Associating Author with Posts
-          // When an Author is deleted, also delete any associated Posts
-          User.hasMany(models.Bucketlist, {
-            onDelete: "cascade"
-          });
-        }
-      }
+    var User = sequelize.define('User', {
+        email: DataTypes.STRING,
+        password: DataTypes.STRING
+    });
+    // generating a hash
+    User.generateHash = function(password) {
+        // or use crypto
+//        var crypto = require('crypto');
+//        var shasum = crypto.createHash('sha1');
+//        shasum.update(this.password);
+//        this.password = shasum.digest('hex');
+        return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
     }
-  );
-  return Author;
-};
+    // checking if password is valid
+    User.validPassword = function(user, password) {
+        return bcrypt.compareSync(password, user.password);
+    };
+
+    return User;
+}

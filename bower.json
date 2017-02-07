@@ -1,0 +1,31 @@
+{
+  "name": "peer-pressure",
+  "description": "an event application using Node, Express, Sequelize, and the latest CSS Frameworks.",
+  "main": "server.js",
+  "authors": [
+    "Bruggeman",
+    "Holowicki",
+    "Rosenberg",
+    "Naik"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Node",
+    "Sequelize",
+    "CSS",
+    "Express"
+  ],
+  "homepage": "https://github.com/JoshBruggeman/PeerPressure",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "fontawesome#^4.7.0"
+  }
+}
