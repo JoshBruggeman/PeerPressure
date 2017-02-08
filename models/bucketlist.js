@@ -1,7 +1,8 @@
 module.exports = function(sequelize, DataTypes) {
   var BucketItem = sequelize.define('BucketItem', {
       title: DataTypes.STRING,
-      isAchieved: DataTypes.BOOLEAN
+      isAchieved: DataTypes.BOOLEAN,
+      image: DataTypes.STRING
   },
 
   {
