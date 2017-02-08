@@ -1,11 +1,10 @@
 {
   "development": {
     "username": "root",
-    "password": "root",
+    "password": "clarinet32729",
     "database": "peerPressure_db",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "port" : 3307
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
