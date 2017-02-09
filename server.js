@@ -85,8 +85,8 @@ app.post('/file-upload',function(req,res){
 })
  // require("./routes/html-route.js")(app);
 	app.get('/', function(req, res) {
-		res.render('index.handlebars');
-		// res.sendFile(__dirname + '/views/dropzone.html')
+		// res.render('index.handlebars');
+		res.sendFile(__dirname + '/views/dropzone.html')
 	});
 require('./routes/user-api-route.js')(app, passport); // load our routes and pass in our app and fully configured passport
  // require("./routes/poststream-api-route.js")(app);
