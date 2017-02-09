@@ -52,16 +52,16 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
  app.use(express.static("./public"));
 app.post('/upload', function(req, res) {
   var sampleFile;
- 
+
   if (!req.files) {
     res.send('No files were uploaded.');
     return;
   }
    console.log('req.fie', req.files)
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file 
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   sampleFile = req.files.file;
- 
-  // Use the mv() method to place the file somewhere on your server 
+
+  // Use the mv() method to place the file somewhere on your server
   sampleFile.mv(__dirname+'/public/picsandstuff/'+ req.files.file.name, function(err) {
     if (err) {
       res.status(500).send(err);
@@ -73,7 +73,7 @@ app.post('/upload', function(req, res) {
 });
 // Routes =============================================================
 app.post('/file-upload',function(req,res){
-	console.log("from-fileload",req.body)
+	console.log("from-fileload",req.body.file.name);
  fs.readFile(req.files.displayImage.path, function (err, data) {
 //   // ...
    var newPath = __dirname + "/uploads/";
@@ -82,15 +82,15 @@ app.post('/file-upload',function(req,res){
    });
  });
 	// file code here
-}) 
- require("./routes/html-route.js")(app);
+})
+ // require("./routes/html-route.js")(app);
 	app.get('/', function(req, res) {
 		res.render('index.handlebars');
-		res.sendFile(__dirname + '/views/dropzone.html')
+		// res.sendFile(__dirname + '/views/dropzone.html')
 	});
 require('./routes/user-api-route.js')(app, passport); // load our routes and pass in our app and fully configured passport
- require("./routes/poststream-api-route.js")(app);
- require("./routes/bucketlist-api-route.js")(app);
+ // require("./routes/poststream-api-route.js")(app);
+ // require("./routes/bucketlist-api-route.js")(app);
 
 // Syncing our sequelize models and then starting our express app
 
