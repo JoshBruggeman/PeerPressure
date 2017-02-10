@@ -51,16 +51,25 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // Static directory
  app.use(express.static("./public"));
 
-app.get('/', function(req, res) {
-  res.render('index.handlebars');
-  // res.sendFile(__dirname + '/views/dropzone.html');
-});
-
-
+;
 
 require('./routes/user-api-route.js')(app, passport); // load our routes and pass in our app and fully configured passport
  require("./routes/photo-upload-routes.js")(app);
 // require('./routes/html-routes.js')(app);
+
+ // require("./routes/html-route.js")(app);
+
+ app.get('/', function(req, res) {
+   res.render('index.handlebars');
+   // res.sendFile(__dirname + '/views/dropzone.html');
+ })
+// require('./routes/bucketItem.js')(app); // load our routes and pass in our app and fully configured passport
+
+
+// require('./routes/user-api-route.js')(app, passport); // load our routes and pass in our app and fully configured passport
+// require('./routes/html-routes.js')(app);
+
+
  // require("./routes/poststream-api-route.js")(app);
  // require("./routes/bucketlist-api-route.js")(app);
 // Syncing our sequelize models and then starting our express app
