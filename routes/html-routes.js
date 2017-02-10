@@ -3,8 +3,13 @@
 var path = require("path");
 
 module.exports = function(app){
-  // cms route loads cms.html
-app.get("/cms", function(req, res) {
-  res.sendFile(path.join(__dirname + "/../public/cms.html"));
-});
+  app.get('/', function(req, res) {
+    res.render('index.handlebars');
+    // res.sendFile(__dirname + '/views/dropzone.html');
+  });
+
+// app.get('/profile', function(req,res){
+// res.sendFile(__dirname + '/views/dropzone.html');
+// })
+
 }

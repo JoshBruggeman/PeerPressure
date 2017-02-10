@@ -26,15 +26,13 @@
 				<!-- <% if (user.email) { %> -->
 					<p>
 						<strong>id</strong>: {{user.id}}<br>
-						<strong>email</strong>: {{user.firstName }}<br>
+						<strong>email</strong>: {{user.email }}<br>
 
 					</p>
 
 					<a href="/unlink/local" class="btn btn-default">Unlink</a>
 				{{/if}}
-				{{#else}}
-					<a href="/connect/local" class="btn btn-default">Connect Local</a>
-				{{/else}}
+
 
 			</div>
 		</div>
