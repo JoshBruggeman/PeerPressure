@@ -91,8 +91,8 @@ app.post('/file-upload',function(req,res){
 	// file code here
 })
 app.get('/', function(req, res) {
-  // res.render('index.handlebars');
-  res.sendFile(__dirname + '/views/dropzone.html');
+  res.render('index.handlebars');
+  // res.sendFile(__dirname + '/views/dropzone.html');
 });
 
  // require("./routes/html-route.js")(app);
