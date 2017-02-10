@@ -1,4 +1,5 @@
 var bcrypt   = require('bcrypt-nodejs');
+
 module.exports = function(sequelize, DataTypes) {
     var User = sequelize.define('User', {
         email: DataTypes.STRING,
@@ -25,6 +26,6 @@ module.exports = function(sequelize, DataTypes) {
     User.validPassword = function(user, password) {
         return bcrypt.compareSync(password, user.password);
     };
-    sequelize.sync({force: true});
+    // sequelize.sync({force: true});
     return User;
 }

@@ -40,7 +40,7 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-
+const db = require('./models/index.js')
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.json());
 app.use(fileUpload());
@@ -67,9 +67,13 @@ var fileTempPath = __dirname + '/public/picsandstuff/' +  req.files.file.name;
       res.status(500).send(err);
     }
     else {
-      var user = {id: 123, name: "Bob" }
-      var awsFileName = "user_" + user.id + "/"+ new Date().getTime() + req.files.file.name;
-      awsUploader({filePath:fileTempPath, name: req.files.file.name, fileNameInS3: awsFileName, user:user }, res);
+
+       db.User.findById(1).then(function(user){
+        console.log("user", user);
+        var awsFileName = "user_" + user.id + "/"+ new Date().getTime() + req.files.file.name;
+        awsUploader({filePath:fileTempPath, name: req.files.file.name, fileNameInS3: awsFileName, user:user }, res);
+      })
+
     }
   });
 });
@@ -80,20 +84,23 @@ app.post('/file-upload',function(req,res){
 //   // ...
    var newPath = __dirname + "/uploads/";
    fs.writeFile(newPath, data, function (err) {
-     res.redirect("back");
+         res.redirect("back");
    });
  });
 	// file code here
 })
+
+
  // require("./routes/html-route.js")(app);
 	app.get('/', function(req, res) {
 		// res.render('index.handlebars');
-		res.sendFile(__dirname + '/views/dropzone.html')
+		res.sendFile(__dirname + '/views/dropzone.html');
 	});
+
+
 require('./routes/user-api-route.js')(app, passport); // load our routes and pass in our app and fully configured passport
  // require("./routes/poststream-api-route.js")(app);
  // require("./routes/bucketlist-api-route.js")(app);
-
 // Syncing our sequelize models and then starting our express app
 
   app.listen(PORT, function() {

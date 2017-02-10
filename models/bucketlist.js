@@ -1,3 +1,5 @@
+var sequelize = require("../config/config.json");
+
 module.exports = function(sequelize, DataTypes) {
   var BucketItem = sequelize.define('BucketItem', {
       title: DataTypes.STRING,
@@ -16,13 +18,12 @@ module.exports = function(sequelize, DataTypes) {
               allowNull: false
             }
         });
-
       }
     }
   }//classMethods
 );
 
-sequelize.sync({force: true});
+// sequelize.sync({force: true});
   return BucketItem;
 
 }

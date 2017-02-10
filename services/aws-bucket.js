@@ -1,5 +1,6 @@
 var s3 = require('s3');
 require('dotenv').load();
+const db = require('../models/index.js')
 
 const s3Config = {
     maxAsyncS3: 20, // this is the default
@@ -14,28 +15,7 @@ const s3Config = {
     }
 }
 var client = s3.createClient(s3Config);
-// const filesToUpload = [
-//     {
-//         filePath: "/files/noob.jpg",
-//         fileNameInS3: "things-and-stuff.jpg"
-//     }
-// ]
 
-
-// var fileNames = ['cat.jpg', 'dog.jpg', 'earth.gif', 'stuff.mp4'];
-// var user = {
-//     id:1
-// }
-
-// function assignNames(user, files){
-//    return  files.map(function(file, index){
-//
-//         return "user_" + user.id + "/"+ new Date().getTime() + file;
-//
-//     })
-// }
-// console.log(assignNames(user, fileNames));
-//
 module.exports = function(fileInfo, res){
 console.log("FileInfo", fileInfo);
   var params = {
@@ -55,8 +35,13 @@ console.log("FileInfo", fileInfo);
       console.log("progress", uploader.progressMd5Amount, uploader.progressAmount, uploader.progressTotal);
   });
   uploader.on('end', function() {
+    var imgSrc = 'https://s3.amazonaws.com/peerpressure8080/' +  fileInfo.fileNameInS3;
+    // fileInfo.user.setBucketItem( {title: fileInfo.name, isAchieved: true, image: imgSrc}).then(function(stuff){
+db.BucketItem.create({UserId: fileInfo.user.id, title: fileInfo.name, isAchieved: true, image: imgSrc }).then(function(){
       console.log("done uploading");
       res.send(fileInfo.name + " uploaded ! ");
+    })
+
   });
 
 
