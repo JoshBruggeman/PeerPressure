@@ -77,6 +77,7 @@ var fileTempPath = __dirname + '/public/picsandstuff/' +  req.files.file.name;
     }
   });
 });
+
 // Routes =============================================================
 app.post('/file-upload',function(req,res){
 	console.log("from-fileload",req.body.file.name);
@@ -89,7 +90,10 @@ app.post('/file-upload',function(req,res){
  });
 	// file code here
 })
-
+app.get('/', function(req, res) {
+  // res.render('index.handlebars');
+  res.sendFile(__dirname + '/views/dropzone.html');
+});
 
  // require("./routes/html-route.js")(app);
 
@@ -101,7 +105,7 @@ require('./routes/html-routes.js')(app);
  // require("./routes/bucketlist-api-route.js")(app);
 // Syncing our sequelize models and then starting our express app
 
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
