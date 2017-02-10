@@ -14,38 +14,50 @@ const s3Config = {
     }
 }
 var client = s3.createClient(s3Config);
+// const filesToUpload = [
+//     {
+//         filePath: "/files/noob.jpg",
+//         fileNameInS3: "things-and-stuff.jpg"
+//     }
+// ]
 
-const filesToUpload = [
-    {
-        filePath: "/files/noob.jpg",
-        fileNameInS3: "things-and-stuff.jpg"
-    }, {
-        filePath: "/files/panmei.gif",
-        fileNameInS3: "hmmm-good-point.gif"
-    }, {
-        filePath: '/files/richard_feynman.jpg',
-        fileNameInS3: "the-man-the-myth-the-legend.jpg"
-    },{
-      filePath: '/files/tiger.jpg',
-      fileNameInS3: "myfile.jpg"
-    }
 
-]
+// var fileNames = ['cat.jpg', 'dog.jpg', 'earth.gif', 'stuff.mp4'];
+// var user = {
+//     id:1
+// }
 
-var params = {
-    localFile: __dirname + filesToUpload[3].filePath,
-    s3Params: {
-        Bucket: "peerpressure8080",
-        Key: filesToUpload[3].fileNameInS3
-    }
-};
-var uploader = client.uploadFile(params);
-uploader.on('error', function(err) {
-    console.error("unable to upload:", err.stack);
-});
-uploader.on('progress', function() {
-    console.log("progress", uploader.progressMd5Amount, uploader.progressAmount, uploader.progressTotal);
-});
-uploader.on('end', function() {
-    console.log("done uploading");
-});
+// function assignNames(user, files){
+//    return  files.map(function(file, index){
+//
+//         return "user_" + user.id + "/"+ new Date().getTime() + file;
+//
+//     })
+// }
+// console.log(assignNames(user, fileNames));
+//
+module.exports = function(fileInfo, res){
+console.log("FileInfo", fileInfo);
+  var params = {
+
+      localFile: fileInfo.filePath,
+      s3Params: {
+          Bucket: "peerpressure8080",
+          Key: fileInfo.fileNameInS3
+      }
+  };
+  var uploader = client.uploadFile(params);
+  uploader.on('error', function(err) {
+      console.error("unable to upload:", err.stack);
+      res.send(fileInfo.name + " Had an error !");
+  });
+  uploader.on('progress', function() {
+      console.log("progress", uploader.progressMd5Amount, uploader.progressAmount, uploader.progressTotal);
+  });
+  uploader.on('end', function() {
+      console.log("done uploading");
+      res.send(fileInfo.name + " uploaded ! ");
+  });
+
+
+}

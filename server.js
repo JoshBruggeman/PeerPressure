@@ -25,7 +25,7 @@ var PORT = process.env.PORT || 8080;
 
 
 require('./config/passport')(passport); // pass passport for configuration
-
+const awsUploader = require('./services/aws-bucket.js')
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
@@ -60,14 +60,16 @@ app.post('/upload', function(req, res) {
    console.log('req.fie', req.files)
   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   sampleFile = req.files.file;
-
+var fileTempPath = __dirname + '/public/picsandstuff/' +  req.files.file.name;
   // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv(__dirname+'/public/picsandstuff/'+ req.files.file.name, function(err) {
+  sampleFile.mv(fileTempPath, function(err) {
     if (err) {
       res.status(500).send(err);
     }
     else {
-      res.send('File uploaded!');
+      var user = {id: 123, name: "Bob" }
+      var awsFileName = "user_" + user.id + "/"+ new Date().getTime() + req.files.file.name;
+      awsUploader({filePath:fileTempPath, name: req.files.file.name, fileNameInS3: awsFileName, user:user }, res);
     }
   });
 });
