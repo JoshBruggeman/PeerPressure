@@ -1,20 +1,8 @@
-
-// var Sequelize = require("sequelize");
-
-var sequelize = require("../config/config.json");
-
 module.exports = function(sequelize, DataTypes) {
   var BucketItem = sequelize.define('BucketItem', {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
-    },
-      title: { 
-        type: Sequelize.STRING
-      },
-      isAchieved: DataTypes.BOOLEAN
-      
+      title: DataTypes.STRING,
+      isAchieved: DataTypes.BOOLEAN,
+      image: DataTypes.STRING
   },
 
   {
@@ -28,14 +16,13 @@ module.exports = function(sequelize, DataTypes) {
               allowNull: false
             }
         });
+
       }
     }
   }//classMethods
 );
 
-// sequelize.sync({force: true});
+
   return BucketItem;
 
 }
-
-// module.exports = BucketItem
