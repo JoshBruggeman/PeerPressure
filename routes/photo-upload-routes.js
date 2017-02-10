@@ -20,7 +20,7 @@ var fileTempPath = __dirname + '/../public/picsandstuff/' +  req.files.file.name
     }
     else {
 
-       db.User.findById(1).then(function(user){
+       db.User.findById(req.user.id).then(function(user){
         console.log("user", user);
         var awsFileName = "user_" + user.id + "/"+ new Date().getTime() + req.files.file.name;
         awsUploader({filePath:fileTempPath, name: req.files.file.name, fileNameInS3: awsFileName, user:user }, res);
