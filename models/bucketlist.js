@@ -1,4 +1,6 @@
-var Sequelize = require("sequelize");
+
+// var Sequelize = require("sequelize");
+
 var sequelize = require("../config/config.json");
 
 module.exports = function(sequelize, DataTypes) {
@@ -26,13 +28,12 @@ module.exports = function(sequelize, DataTypes) {
               allowNull: false
             }
         });
-
       }
     }
   }//classMethods
 );
 
-sequelize.sync({force: true});
+// sequelize.sync({force: true});
   return BucketItem;
 
 }

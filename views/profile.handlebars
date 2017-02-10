@@ -4,6 +4,8 @@
 	<title>Node Authentication</title>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<link rel ="stylesheet" type="text/css" href="./lib/dropzone/dropzone.css">
+
 	<style>
 		body 		{ padding-top:80px; word-wrap:break-word; }
 	</style>
@@ -26,20 +28,20 @@
 				<!-- <% if (user.email) { %> -->
 					<p>
 						<strong>id</strong>: {{user.id}}<br>
-						<strong>email</strong>: {{user.firstName }}<br>
+						<strong>email</strong>: {{user.email }}<br>
 
 					</p>
-
-					<a href="/unlink/local" class="btn btn-default">Unlink</a>
 				{{/if}}
-				{{#else}}
-					<a href="/connect/local" class="btn btn-default">Connect Local</a>
-				{{/else}}
-
 			</div>
 		</div>
 	</div>
 
+	<form action="/upload"
+	      class="dropzone"
+	      id="my-awesome-dropzone" method="post" enctype="multipart/form-data" >
+	      	<!-- <input type="file" name="file" /> -->
+	      </form>
 </div>
+<script src="./lib/dropzone/dropzone.js"></script>
 </body>
 </html>

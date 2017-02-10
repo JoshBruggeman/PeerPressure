@@ -1,5 +1,6 @@
 var s3 = require('s3');
 require('dotenv').load();
+const db = require('../models/index.js')
 
 const s3Config = {
     maxAsyncS3: 20, // this is the default
@@ -15,37 +16,33 @@ const s3Config = {
 }
 var client = s3.createClient(s3Config);
 
-const filesToUpload = [
-    {
-        filePath: "/files/noob.jpg",
-        fileNameInS3: "things-and-stuff.jpg"
-    }, {
-        filePath: "/files/panmei.gif",
-        fileNameInS3: "hmmm-good-point.gif"
-    }, {
-        filePath: '/files/richard_feynman.jpg',
-        fileNameInS3: "the-man-the-myth-the-legend.jpg"
-    },{
-      filePath: '/files/tiger.jpg',
-      fileNameInS3: "myfile.jpg"
-    }
+module.exports = function(fileInfo, res){
+console.log("FileInfo", fileInfo);
+  var params = {
 
-]
+      localFile: fileInfo.filePath,
+      s3Params: {
+          Bucket: "peerpressure8080",
+          Key: fileInfo.fileNameInS3
+      }
+  };
+  var uploader = client.uploadFile(params);
+  uploader.on('error', function(err) {
+      console.error("unable to upload:", err.stack);
+      res.send(fileInfo.name + " Had an error !");
+  });
+  uploader.on('progress', function() {
+      console.log("progress", uploader.progressMd5Amount, uploader.progressAmount, uploader.progressTotal);
+  });
+  uploader.on('end', function() {
+    var imgSrc = 'https://s3.amazonaws.com/peerpressure8080/' +  fileInfo.fileNameInS3;
+    // fileInfo.user.setBucketItem( {title: fileInfo.name, isAchieved: true, image: imgSrc}).then(function(stuff){
+db.BucketItem.create({UserId: fileInfo.user.id, title: fileInfo.name, isAchieved: true, image: imgSrc }).then(function(){
+      console.log("done uploading");
+      res.send(fileInfo.name + " uploaded ! ");
+    })
 
-var params = {
-    localFile: __dirname + filesToUpload[3].filePath,
-    s3Params: {
-        Bucket: "peerpressure8080",
-        Key: filesToUpload[3].fileNameInS3
-    }
-};
-var uploader = client.uploadFile(params);
-uploader.on('error', function(err) {
-    console.error("unable to upload:", err.stack);
-});
-uploader.on('progress', function() {
-    console.log("progress", uploader.progressMd5Amount, uploader.progressAmount, uploader.progressTotal);
-});
-uploader.on('end', function() {
-    console.log("done uploading");
-});
+  });
+
+
+}
