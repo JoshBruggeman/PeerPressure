@@ -25,7 +25,7 @@ var PORT = process.env.PORT || 8080;
 
 
 require('./config/passport')(passport); // pass passport for configuration
-const awsUploader = require('./services/aws-bucket.js')
+
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
@@ -50,57 +50,17 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 // Static directory
  app.use(express.static("./public"));
-app.post('/upload', function(req, res) {
-  var sampleFile;
 
-  if (!req.files) {
-    res.send('No files were uploaded.');
-    return;
-  }
-   console.log('req.fie', req.files)
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  sampleFile = req.files.file;
-var fileTempPath = __dirname + '/public/picsandstuff/' +  req.files.file.name;
-  // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv(fileTempPath, function(err) {
-    if (err) {
-      res.status(500).send(err);
-    }
-    else {
-
-       db.User.findById(1).then(function(user){
-        console.log("user", user);
-        var awsFileName = "user_" + user.id + "/"+ new Date().getTime() + req.files.file.name;
-        awsUploader({filePath:fileTempPath, name: req.files.file.name, fileNameInS3: awsFileName, user:user }, res);
-      })
-
-    }
-  });
-});
-
-// Routes =============================================================
-app.post('/file-upload',function(req,res){
-	console.log("from-fileload",req.body.file.name);
- fs.readFile(req.files.displayImage.path, function (err, data) {
-//   // ...
-   var newPath = __dirname + "/uploads/";
-   fs.writeFile(newPath, data, function (err) {
-         res.redirect("back");
-   });
- });
-	// file code here
-})
 app.get('/', function(req, res) {
   res.render('index.handlebars');
   // res.sendFile(__dirname + '/views/dropzone.html');
 });
 
- // require("./routes/html-route.js")(app);
-
 
 
 require('./routes/user-api-route.js')(app, passport); // load our routes and pass in our app and fully configured passport
-require('./routes/html-routes.js')(app);
+ require("./routes/photo-upload-routes.js")(app);
+// require('./routes/html-routes.js')(app);
  // require("./routes/poststream-api-route.js")(app);
  // require("./routes/bucketlist-api-route.js")(app);
 // Syncing our sequelize models and then starting our express app
