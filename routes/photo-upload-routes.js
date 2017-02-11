@@ -25,7 +25,6 @@ var fileTempPath = __dirname + '/../public/picsandstuff/' +  req.files.file.name
         var awsFileName = "user_" + user.id + "/"+ new Date().getTime() + req.files.file.name;
         awsUploader({filePath:fileTempPath, name: req.files.file.name, fileNameInS3: awsFileName, user:user }, res);
       })
-
     }
   });
 });

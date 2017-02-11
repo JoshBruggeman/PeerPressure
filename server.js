@@ -68,7 +68,7 @@ require('./routes/user-api-route.js')(app, passport); // load our routes and pas
 // require('./routes/html-routes.js')(app);
 
 
- // require("./routes/poststream-api-route.js")(app);
+ require("./routes/poststream-routes.js")(app);
  // require("./routes/bucketlist-api-route.js")(app);
 // Syncing our sequelize models and then starting our express app
 
