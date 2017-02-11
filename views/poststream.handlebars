@@ -1,0 +1,14 @@
+<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+
+<h1>My Acheivements!</h1>
+
+
+<!-- Pass in data from poststream-routes.js -->
+<ul>
+  {{#each usersBucket}}
+  	<li>
+      <p><span class="label">Entry:</span> {{this.title}}</p>
+      <p><span class="label">Photo:</span> {{this.image}}</p>
+  	</li>
+  {{/each}}
+</ul>

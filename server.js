@@ -52,7 +52,8 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
  app.use(express.static("./public"));
 
 require('./routes/user-api-route.js')(app, passport); // load our routes and pass in our app and fully configured passport
- require("./routes/photo-upload-routes.js")(app);
+require("./routes/photo-upload-routes.js")(app);
+require("./routes/poststream-routes.js")(app);
 // require('./routes/html-routes.js')(app);
 
  // require("./routes/html-route.js")(app);
