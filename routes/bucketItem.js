@@ -1,4 +1,4 @@
-var db = require("../models/bucketlist.js");
+
 // Routes
 // =============================================================
 module.exports = function(app) {
@@ -9,7 +9,7 @@ module.exports = function(app) {
     //   query.AuthorId = req.query.author_id;
     // }
     // 1. Add a join here to include all of the Authors to these posts
-    db.findAll({}).then(function(results) {
+    dbBucket.findAll({}).then(function(results) {
       res.json(results);
     });
   });
@@ -31,7 +31,7 @@ module.exports = function(app) {
     console.log('BucketList Data:');
     console.log(req.body);
 
-    db.create({
+    dbBucket.create({
       title: req.body.title,
       isAchieved: req.body.isAchieved
       }).then(function(results) {

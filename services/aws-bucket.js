@@ -15,7 +15,7 @@ const s3Config = {
     }
 }
 var client = s3.createClient(s3Config);
-
+var dbBucket = require("../models/bucketlist.js");
 module.exports = function(fileInfo, res){
 console.log("FileInfo", fileInfo);
   var params = {
@@ -38,6 +38,7 @@ console.log("FileInfo", fileInfo);
     var imgSrc = 'https://s3.amazonaws.com/peerpressure8080/' +  fileInfo.fileNameInS3;
     // fileInfo.user.setBucketItem( {title: fileInfo.name, isAchieved: true, image: imgSrc}).then(function(stuff){
 db.BucketItem.create({UserId: fileInfo.user.id, title: fileInfo.name, isAchieved: true, image: imgSrc }).then(function(){
+// db.bucketItem.update
 // db.BucketItem.create({UserId: fileInfo.user.id, isAchieved: true, image: imgSrc }).then(function(){
       console.log("done uploading");
       res.send(fileInfo.name + " uploaded ! ");

@@ -8,7 +8,7 @@ module.exports = function(app, passport) {
 
 	// PROFILE SECTION =========================
 	app.get('/profile', isLoggedIn, function(req, res) {
-		res.render('profile.handlebars', {
+		res.render('poststream.handlebars', {
 			user : req.user
 		});
 	});

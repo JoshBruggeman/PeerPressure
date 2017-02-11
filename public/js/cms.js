@@ -2,10 +2,9 @@
 // When user clicks add-btn
 $("#bucketItem-submit").on("click", function(event) {
   event.preventDefault();
-  // Make a newChirp object
+  // Make an object
   var newBucketItem = {
-    title: $("#title").val().trim(),
-    created_at: moment().format("YYYY-MM-DD HH:mm:ss")
+    title: $("#bucketList-box").val().trim()
   };
   console.log(newBucketItem);
   // Send an AJAX POST-request with jQuery
@@ -14,8 +13,8 @@ $("#bucketItem-submit").on("click", function(event) {
     .done(function() {
       var row = $("<div>");
       row.addClass("bucketItem");
+      // row.addId(newBucketItem.id);
       row.append("<p>" + newBucketItem.title + " posted: </p>");
-      row.append("<p>At " + moment(newChirp.created_at).format("h:mma on dddd") + "</p>");
       $("#bucketItem-area").prepend(row);
     });
   // Empty each input box by replacing the value with an empty string
@@ -23,14 +22,29 @@ $("#bucketItem-submit").on("click", function(event) {
   $("#bucketList-box").val("");
 });
 // When the page loads, grab all of our chirps
-$.get("/api/all", function(data) {
+$.get("/api/bucketlist", function(data) {
   if (data.length !== 0) {
     for (var i = 0; i < data.length; i++) {
       var row = $("<div>");
       row.addClass("bucketItem");
       row.append("<p>" + data[i].bucketItem + " posted.. </p>");
-      row.append("<p>At " + moment(data[i].created_at).format("h:mma on dddd") + "</p>");
       $("#bucketItem-area").prepend(row);
     }
   }
 });
+
+
+// function handleDeleteButtonPress() {
+//   var listItemData = $(this).whateverhere
+//   var id = listItemData.id;
+//   $.ajax({
+//     method: "DELETE",
+//     url: "/api/delete/" + id
+//   })
+//   .done(getBucketItem);
+// }
+// });
+//
+// $.delete("/api/delete/:id", function(req, res){
+//
+// });

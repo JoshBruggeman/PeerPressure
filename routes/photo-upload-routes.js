@@ -19,7 +19,6 @@ var fileTempPath = __dirname + '/../public/picsandstuff/' +  req.files.file.name
       res.status(500).send(err);
     }
     else {
-
        db.User.findById(req.user.id).then(function(user){
         console.log("user", user);
         var awsFileName = "user_" + user.id + "/"+ new Date().getTime() + req.files.file.name;
