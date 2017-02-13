@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+	<title>Node Authentication</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<style>
+		body 		{ padding-top:80px; word-wrap:break-word; }
+	</style>
+</head>
+<body>
+
+<div class="container">
+
+	<div class="page-header text-center">
+		<h1><span class="fa fa-anchor"></span><h1>My Bucket List!</h1></h1>
+		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+	</div>
+
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+
+          <p class="cool-font">Bucket Item</p>
+        <textarea class="form-control" rows="2" id="title" placeholder="Enter Bucket Item Here!"></textarea>
+          <button id="bucketItem-submit" class="btn btn-lg pull-right">Submit!</button>
+        </div>
+        <div class="col-sm-8 col-sm-offset-2">
+          <form action="/upload"
+                class="dropzone"
+                id="my-awesome-dropzone" method="post" enctype="multipart/form-data" >
+              </form>
+      </div>
+
+      </div>
+      <div class="class="col-sm-8 col-sm-offset-2"">
+      </div>
+</div>
+      </div>
+</div>
+
+      <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <h2>Bucketlist</h2>
+          <hr>
+          <ul>
+         {{#each bucketitems}}
+           {{# unless this.isAchieved}}
+           <li>
+             <p><span class="label">Title :</span> {{this.title}}</p>
+           </li>
+         {{/unless}}
+         {{/each}}
+       </ul>
+  <!-- <button type="button" name="button" id="checkmark" onclick="/updatebucket">X</button> -->
+</div>
+        <div id="bucketItem-area"></div>
+        </div>
+      </div>
+    </div>
+
+
+<!-- Pass in data from poststream-routes.js -->
+ </div>
+		</div>
+	</div>
+
+</div>
+
+
+
+    <script src="./lib/dropzone/dropzone.js"></script>
+</body>
+</html>

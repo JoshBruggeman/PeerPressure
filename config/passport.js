@@ -80,13 +80,11 @@ module.exports = function(passport) {
         // by default, local strategy uses username and password, we will override with email
         usernameField : 'email',
         passwordField : 'password',
-        //  firstNameField : req.body.firstName,
-        //  lastNameField : req.body.lastName,
         passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     },
-    function(req,  email, password, done) {
+    function(req, email, password, done) {
         if (email)
-            // email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
+            email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
 
         // asynchronous
         process.nextTick(function() {
@@ -125,4 +123,7 @@ module.exports = function(passport) {
         });
 
     }));
+
+
+
 };

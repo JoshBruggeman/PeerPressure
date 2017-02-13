@@ -1,4 +1,7 @@
 module.exports = function(app, passport) {
+	// load up the user model
+    var db = require('../models')
+    var User = db.User;
 
 // normal routes ===============================================================
 	// show the home page (will also have our login links)
@@ -6,28 +9,74 @@ module.exports = function(app, passport) {
 		res.render('index.handlebars');
 	});
 
-	// PROFILE SECTION =========================
-	app.get('/profile', isLoggedIn, function(req, res) {
-		res.render('poststream.handlebars', {
-			user : req.user
-		});
-	});
+	// app.get('/poststream', isLoggedIn, function(req, res) {
+
+	// 	db.BucketItem.findAll({
+	// 				where: {
+	// 						UserId: req.user.id,
+	// 						isAchieved: true
+	// 				}
+	// 		}).then(function(usersBucket) {
+	// 			console.log("==printing============");
+	// 				console.log(usersBucket);
+	// 				res.render('poststream.handlebars', usersBucket);
+	// 		});
+	//
+	// });
+
+app.get('/poststream', isLoggedIn, function(req, res){
+	var query = {};
+
+  if(req.query.id){
+    query.id = req.query.id;
+  }
+	db.BucketItem.findAll({
+		where : query,
+		include : [User]
+	}).then(function(allbucket){
+		console.log(allbucket);
+		return res.render('poststream', {bucketitems : allbucket});
+	})
+})
+
 	// LOGOUT ==============================
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
 	});
 
-	// locally --------------------------------
-		// LOGIN ===============================
-		// show the login form
+
+app.get('/bucketlist', isLoggedIn, function(req, res){
+	var query = {};
+  if(req.query.id){
+    query.id = req.query.id;
+  }
+	db.BucketItem.findAll({
+		where : query,
+		include : [User]
+	}).then(function(allbucket){
+		console.log(allbucket);
+		return res.render('bucketlist', {bucketitems : allbucket});
+	})
+})
+
+//add a new bucket list item
+router.post('/bucketlist', function(req, res){
+		BucketItem.create({title : req.body.title})
+		.then(function(newbucketItem){
+			console.log(newbucketItem);
+			res.redirect('/bucketlist');
+		});
+});
+
+
 		app.get('/login', function(req, res) {
 			res.render('login.handlebars', { message: req.flash('loginMessage') });
 		});
 
 		// process the login form
 		app.post('/login', passport.authenticate('local-login', {
-			successRedirect : '/profile', // redirect to the secure profile section
+			successRedirect : '/poststream', // redirect to the secure profile section
 			failureRedirect : '/login', // redirect back to the signup page if there is an error
 			failureFlash : true // allow flash messages
 		}));
@@ -40,14 +89,11 @@ module.exports = function(app, passport) {
 
 		// process the signup form
 		app.post('/signup', passport.authenticate('local-signup', {
-			successRedirect : '/profile', // redirect to the secure profile section
+			successRedirect : '/poststream', // redirect to the secure profile section
 			failureRedirect : '/signup', // redirect back to the signup page if there is an error
 			failureFlash : true // allow flash messages
 		}));
 
-  // load up the user model
-    var db = require('../models')
-    var User = db.User;
 
 };
 

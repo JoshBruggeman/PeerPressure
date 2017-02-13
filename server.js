@@ -52,9 +52,9 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
  app.use(express.static("./public"));
 
 require('./routes/user-api-route.js')(app, passport); // load our routes and pass in our app and fully configured passport
-require("./routes/photo-upload-routes.js")(app);
+// require("./routes/photo-upload-routes.js")(app);
  require("./routes/poststream-routes.js")(app);
-require("./routes/bucketList-route.js")(app);
+// require("./routes/bucketList-route.js")(app);
 // Syncing our sequelize models and then starting our express app
 
 db.sequelize.sync().then(function() {

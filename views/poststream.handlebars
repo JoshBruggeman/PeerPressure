@@ -1,18 +1,55 @@
-<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+<!doctype html>
+<html>
+<head>
+	<title>Node Authentication</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<style>
+		body 		{ padding-top:80px; word-wrap:break-word; }
+	</style>
+</head>
+<body>
+<div class="container">
+
+	<div class="page-header text-center">
+		<h1><span class="fa fa-anchor"></span> Profile Page</h1>
+		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+	</div>
+	<div class="col-md-2 col-sm-2">
+	        <a class="btn btn-default" href="/bucketlist">My Bucket List</a>
+	      </div>
+	<div class="row">
+
+		<!-- LOCAL INFORMATION -->
+		<div class="col-sm-6">
+			<div class="well">
+
+
+				<!-- <% if (user.email) { %> -->
 
 <h1>My Acheivements!</h1>
 
 
-
-<div class="">
-  <a href="/cms.html">Look at my bucket list</a>
-</div>
-<!-- Pass in data from poststream-routes.js -->
-<ul>
-  {{#each usersBucket}}
-  	<li>
-      <p><span class="label">Entry:</span> {{this.title}}</p>
-      <p><span class="label">Photo:</span> {{this.image}}</p>
-  	</li>
-  {{/each}}
+ <ul>
+{{#each bucketitems}}
+	{{# if this.isAchieved}}
+	<li>
+		<p><span class="label"></span> {{this.id}}.</p>
+		<p><span class="label">Title :</span> {{this.this.title}}</p>
+		<p><span class="label"></span></p>
+		<img src= {{this.image}} alt="" height="300px" width="300px">
+		<p><span class="label">Post :</span> {{this.blogText}}</p>
+	</li>
+{{/if}}
+{{/each}}
 </ul>
+
+
+<!-- Pass in data from poststream-routes.js -->
+			</div>
+		</div>
+	</div>
+
+</div>
+</body>
+</html>
