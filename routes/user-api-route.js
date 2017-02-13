@@ -60,14 +60,22 @@ app.get('/bucketlist', isLoggedIn, function(req, res){
 	})
 })
 
-//add a new bucket list item
-router.post('/bucketlist', function(req, res){
-		BucketItem.create({title : req.body.title})
-		.then(function(newbucketItem){
-			console.log(newbucketItem);
-			res.redirect('/bucketlist');
-		});
-});
+
+app.post('/bucketlist', function(req, res){
+  db.BucketItem.create({
+    bucketObj :{
+      title : req.body.title,
+      isAchieved : false,
+      image : null,
+      blogText : null,
+			UserId : req.user.id
+    }
+
+  }).then(function(bucketObj){
+console.log(bucketObj);
+    res.redirect('/bucketlist');
+  })
+})
 
 
 		app.get('/login', function(req, res) {

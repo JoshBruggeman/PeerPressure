@@ -1,7 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
   var BucketItem = sequelize.define('BucketItem', {
       title: DataTypes.STRING,
-      isAchieved: DataTypes.BOOLEAN,
+      isAchieved:{
+        type :DataTypes.BOOLEAN,
+        defaultValue  : false
+      },
       image: {
         type: DataTypes.STRING,
         allowNull: true
