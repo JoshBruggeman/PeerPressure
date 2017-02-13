@@ -3,26 +3,14 @@ module.exports = function(app, passport) {
     var db = require('../models')
     var User = db.User;
 
+		var BucketItem = require("../models").BucketItem;
+
+
 // normal routes ===============================================================
 	// show the home page (will also have our login links)
 	app.get('/', function(req, res) {
 		res.render('index.handlebars');
 	});
-
-	// app.get('/poststream', isLoggedIn, function(req, res) {
-
-	// 	db.BucketItem.findAll({
-	// 				where: {
-	// 						UserId: req.user.id,
-	// 						isAchieved: true
-	// 				}
-	// 		}).then(function(usersBucket) {
-	// 			console.log("==printing============");
-	// 				console.log(usersBucket);
-	// 				res.render('poststream.handlebars', usersBucket);
-	// 		});
-	//
-	// });
 
 app.get('/poststream', isLoggedIn, function(req, res){
 	var query = {};
@@ -30,7 +18,7 @@ app.get('/poststream', isLoggedIn, function(req, res){
   if(req.query.id){
     query.id = req.query.id;
   }
-	db.BucketItem.findAll({
+	BucketItem.findAll({
 		where : query,
 		include : [User]
 	}).then(function(allbucket){
@@ -51,7 +39,7 @@ app.get('/bucketlist', isLoggedIn, function(req, res){
   if(req.query.id){
     query.id = req.query.id;
   }
-	db.BucketItem.findAll({
+	BucketItem.findAll({
 		where : query,
 		include : [User]
 	}).then(function(allbucket){
@@ -66,7 +54,7 @@ app.get('/update', isLoggedIn, function(req, res){
   if(req.query.id){
     query.id = req.query.id;
   }
-	db.BucketItem.findAll({
+	BucketItem.findAll({
 		where : query,
 		include : [User]
 	}).then(function(allbucket){
@@ -76,16 +64,10 @@ app.get('/update', isLoggedIn, function(req, res){
 })
 
 app.post('/bucketlist', function(req, res){
-  db.BucketItem.create({
-    bucketObj :{
-      title : req.body.title,
-      isAchieved : false,
-      image : null,
-      blogText : null,
-			UserId : req.user.id
-    }
-
-  }).then(function(bucketObj){
+  BucketItem.create({
+      title: req.body.title,
+			UserId: req.user.id
+		}).then(function(bucketObj){
 console.log(bucketObj);
     res.redirect('/bucketlist');
   })

@@ -1,7 +1,7 @@
-var db = require("../models/bucketlist.js");
+// var db = require("../models/bucketlist.js");
 // Routes
 // =============================================================
-module.exports = function(app) {
+// module.exports = function(app) {
   // GET route for getting all of the bucketitems
 //   app.get('/profile', function(req, res) {
 //
