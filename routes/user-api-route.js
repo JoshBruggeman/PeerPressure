@@ -61,6 +61,20 @@ app.get('/bucketlist', isLoggedIn, function(req, res){
 })
 
 
+app.get('/update', isLoggedIn, function(req, res){
+	var query = {};
+  if(req.query.id){
+    query.id = req.query.id;
+  }
+	db.BucketItem.findAll({
+		where : query,
+		include : [User]
+	}).then(function(allbucket){
+		console.log(allbucket);
+		return res.render('update', {bucketitems : allbucket});
+	})
+})
+
 app.post('/bucketlist', function(req, res){
   db.BucketItem.create({
     bucketObj :{
