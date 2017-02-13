@@ -16,68 +16,45 @@
 		<h1><span class="fa fa-anchor"></span><h1>My Bucket List!</h1></h1>
 		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
 	</div>
-<!--
-    <div class="row">
-      <form class="" action="/bucketlist" method="POST">
-        <div class="col-xs-9">
-          <textarea class="form-control" rows="2" id="title" placeholder="Enter Bucket Item Here!"></textarea>
-        </div>
-
-      <div class="col-xs-3 button">
-        <button type="submit" class="btn btn-lg">Add new Bucket List Item</button>
-      </div>
-      </form>
-    </div> -->
-
-
-    </div>
-      <div class="class="col-sm-8 col-sm-offset-2"">
-      </div>
 </div>
-      </div>
-</div>
-
       <div class="container">
-      <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-          <h2>Bucketlist</h2>
-          <hr>
-          <ul>
-         {{#each bucketitems}}
-           {{# unless this.isAchieved}}
-           <li>
-             <p><span class="label">Title :</span> {{this.title}}
+        <div class="row">
+        			<div class="col-md-6 col-md-offset-3">
+                <ul>
+               {{#each bucketitems}}
+                 {{# unless this.isAchieved}}
+                 <li>
+                   <div class="form-group">
+        						<label for="title">Title:</label>
+        						{{this.title}}
+        						<br />
+        						<label for="uploadImage">Upload some photos:</label>
+                    <form action="/upload"
+                          class="dropzone"
+                          id="my-awesome-dropzone" method="post" enctype="multipart/form-data" >
+                        </form>
 
-               <div class="col-sm-8 col-sm-offset-2">
-                 <form action="/upload"
-                       class="dropzone"
-                       id="my-awesome-dropzone" method="post" enctype="multipart/form-data" >
-                     </form>
-             </div>
-						 </p>
+        						<div class="form-group">
+        							<label for="blogText">Share your experience :</label>
+                      <textarea placeholder="Post Body" class="form-control" rows="10" id="body"></textarea>
+          						</div>
+        						<br />
+        						<button type="submit" class="btn btn-success submit">Submit</button>
+        					</div>
 
-           </li>
-
-
-
-
-         {{/unless}}
-         {{/each}}
-       </ul>
-  <!-- <button type="button" name="button" id="checkmark" onclick="/updatebucket">X</button> -->
-</div>
-        <div id="bucketItem-area"></div>
-        </div>
-      </div>
-    </div>
+                </li>
+              {{/unless}}
+              {{/each}}
+             </ul>
+        			</div>
+        		</div>
 
 
-<!-- Pass in data from poststream-routes.js -->
+
+
+  <!-- Pass in data from poststream-routes.js -->
  </div>
 		</div>
-	</div>
-
-</div>
 
 
 

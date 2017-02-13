@@ -74,6 +74,14 @@ console.log(bucketObj);
 })
 
 
+// app.put('/update:id', function(req, res){
+// 	BucketItem.update({
+// 		isAchieved : true,
+// 		image :
+// 	})
+// })
+
+
 		app.get('/login', function(req, res) {
 			res.render('login.handlebars', { message: req.flash('loginMessage') });
 		});
