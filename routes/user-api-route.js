@@ -49,19 +49,68 @@ app.get('/bucketlist', isLoggedIn, function(req, res){
 })
 
 
-app.get('/update', isLoggedIn, function(req, res){
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+
+app.put('/bucketlist/:id', function(req, res){
+	BucketItem.update({
+		isAchieved : true
+	},
+	{
+			where :{
+			id :req.params.id
+			}
+	}
+).then(function(oneobj){
+			console.log(oneobj);
+			return res.render('update', {bucketitems : oneobj});
+	})
+})
+
+app.get('/update', function(req, res){
 	var query = {};
+
   if(req.query.id){
     query.id = req.query.id;
   }
+
 	BucketItem.findAll({
 		where : query,
 		include : [User]
-	}).then(function(allbucket){
-		console.log(allbucket);
-		return res.render('update', {bucketitems : allbucket});
+	}).then(function(oneobj){
+		console.log(oneobj);
+		return res.render('update', {bucketitems : oneobj});
 	})
 })
+
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+
+// app.put('/bucketlist/:id', function(req, res){
+// 	BucketItem.update({
+// 		isAchieved : true,
+// 	},{
+// 		where : {
+// 			id : req.params.id
+// 		},
+// 		include: [User]
+// 	}).then(function(oneobj){
+// 		return res.render('update', oneobj);
+// 	})
+// })
+// router.put("/update/:id", function(req, res){
+//   var condition = "id = " + req.params.id;
+//   console.log(condition);
+//
+//   burger.update({
+//     devoured : req.body.devoured
+//   }, condition, function(){
+//     res.redirect("/");
+//   })
+// });
+
+
+
 
 app.post('/bucketlist', function(req, res){
   BucketItem.create({
@@ -74,10 +123,16 @@ console.log(bucketObj);
 })
 
 
-// app.put('/update:id', function(req, res){
+//
+// app.put('/bucketlist/:id', function(req, res){
 // 	BucketItem.update({
+// 		id: req.params.id,
+//
 // 		isAchieved : true,
-// 		image :
+// 		blogText : req.body.blogText,
+// 		image : imgsrc
+// 	}).then(function(obj){
+// 		res.render(obj);
 // 	})
 // })
 
@@ -137,7 +192,7 @@ sampleFile.mv(fileTempPath, function(err) {
 });
 
 // Routes =============================================================
-app.post('/file-upload',function(req,res){
+app.post('/upload:',function(req,res){
 console.log("from-fileload",req.body.file.name);
 fs.readFile(req.files.displayImage.path, function (err, data) {
 //   // ...

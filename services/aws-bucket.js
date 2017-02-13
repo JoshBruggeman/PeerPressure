@@ -37,15 +37,12 @@ console.log("FileInfo", fileInfo);
   uploader.on('end', function() {
     var imgSrc = 'https://s3.amazonaws.com/peerpressure8080/' +  fileInfo.fileNameInS3;
     // fileInfo.user.setBucketItem( {title: fileInfo.name, isAchieved: true, image: imgSrc}).then(function(stuff){
-db.BucketItem.put({UserId: fileInfo.user.id, isAchieved: true, image: imgSrc }).then(function(){
+db.BucketItem.create({UserId: fileInfo.user.id, title: fileInfo.name, isAchieved: true, image: imgSrc }).then(function(){
 // db.bucketItem.update
 // db.BucketItem.create({UserId: fileInfo.user.id, isAchieved: true, image: imgSrc }).then(function(){
       console.log("done uploading");
       res.send(fileInfo.name + " uploaded ! ");
-
-      
     })
-
   });
 
 
