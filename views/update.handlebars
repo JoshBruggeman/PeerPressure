@@ -25,12 +25,9 @@
         <div class="row">
         			<div class="col-md-6 col-md-offset-3">
                 <ul>
-               {{#each bucketitems}}
-                 {{# unless this.isAchieved}}
                  <li>
                    <div class="form-group">
-        						<label for="title">Title:</label>
-        						{{this.title}}
+        						<label for="title">Title:</label>{{titletoChange.title}}
         						<br />
         						<label for="uploadImage">Upload some photos:</label>
                     <form action="/upload"
@@ -47,16 +44,13 @@
         					</div>
 
                 </li>
-              {{/unless}}
-              {{/each}}
              </ul>
         			</div>
         		</div>
-  <!-- Pass in data from poststream-routes.js -->
+
  </div>
 		</div>
 
-<!-- <script type="text/javascript" src= "dropzone.js"> -->
    <script src="/lib/dropzone/dropzone.js"></script>
 
 </body>

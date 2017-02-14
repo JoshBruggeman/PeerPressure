@@ -52,36 +52,31 @@ app.get('/bucketlist', isLoggedIn, function(req, res){
 ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
 
-app.put('/update/:id', function(req, res){
-	BucketItem.update({
-		isAchieved : true
-	},
-	{
-			where :{
-			id :req.params.id
-			}
-	}
-).then(function(oneobj){
-			console.log(oneobj);
-			return res.render('update', {bucketitems : oneobj});
-	})
-})
+app.get('/api/title/:id', function(req, res){
+  BucketItem.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).then(function(oneTitle) {
+    res.render('update', {titletoChange : oneTitle});
+  });
+});
 
-app.get('/update', function(req, res){
-	var query = {};
-
-  if(req.query.id){
-    query.id = req.query.id;
-  }
-
-	BucketItem.findAll({
-		where : query,
-		include : [User]
-	}).then(function(oneobj){
-		console.log(oneobj);
-		return res.render('update', {bucketitems : oneobj});
-	})
-})
+// app.get('/update', function(req, res){
+// 	var query = {};
+//
+//   if(req.query.id){
+//     query.id = req.query.id;
+//   }
+//
+// 	BucketItem.findAll({
+// 		where : query,
+// 		include : [User]
+// 	}).then(function(oneobj){
+// 		console.log(oneobj);
+// 		return res.render('update', {bucketitems : oneobj});
+// 	})
+// })
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
