@@ -17,6 +17,27 @@ nav {
   float: right;
 }
 
+.header1 {
+  font: 100%/1 'Lobster', cursive;
+  font-size: 2.5em;
+  text-align: center;
+}
+
 .textInsert {
   font: 100%/1 'Raleway:500', cursive;
+}
+.background {
+    background-image: url("../bubblebackground.jpg");
+}
+
+.adjust {
+  float: left;
+}
+ul {
+  list-style-type: none;
+}
+
+.bucketItem {
+  font: 100%/1 'Raleway:500', cursive;
+  font-size: 1.8em;
 }

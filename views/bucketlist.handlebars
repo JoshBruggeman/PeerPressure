@@ -3,68 +3,57 @@
 <head>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
 	<style>
 		body {
-			padding-top: 80px;
+			padding-top: 20px;
 			word-wrap: break-word;
 		}
 	</style>
 </head>
+<body class="background">
+	<nav class="navbar">
+					<p>Bucketlist<p>
+					<a href="/about" class="btn btn-default btn-sm menuTop">About</a>
+					<a href="/contact" class="btn btn-default btn-sm menuTop">Contact</a>
+					<a href="/logout" class="btn btn-default btn-sm menuTop">Logout</a>
+					<a class="btn btn-default btn-sm menuTop" href="/bucketlist">My Bucket List</a>
+	</nav>
+	<div class="header1">
+		<h1 class="header1">My Bucketlist</h1>
+		<br>
+		<br>
+	</div>
+	<div class="row">
+         <div class="col-md-8 text-center">
+					 <ul>
+ 					  {{#each bucketitems}}
+ 					    {{# unless this.isAchieved}}
+ 					      <form method="get" action="/api/title/{{this.id}}">
+ 					        <li>
+ 					          <p class="bucketItem"> <strong>{{this.title}}</strong>
+ 					            <button class="btn btn-default fa fa-check" type="submit">Mark Done</button>
+											</p>
+ 					        </li>
+ 					      </form>
 
-<body>
+ 					      {{/unless}}
+ 					  {{/each}}
+ 					</ul>
+ 					<div class="bucketItem-area">
+ 					</div>
+         </div>
+         <div class="col-md-2 text-center">
+					 <form class="" action="/bucketlist" method="POST">
+					   <div class="col-xs-9">
+					     <textarea class="form-control" rows="2" id="bucket-item" name="title" placeholder="Enter Bucket Item Here!"></textarea>
+					   </div>
 
-	<div class="container">
-
-		<div class="page-header text-center">
-			<h1><span class="fa"></span><h1>My Bucket List</h1></h1>
-			<a href="/logout" class="btn btn-default btn-sm">Logout</a>
-		</div>
-
-		<div class="row">
-			<form class="" action="/bucketlist" method="POST">
-				<div class="col-xs-9">
-					<textarea class="form-control" rows="2" id="bucket-item" name="title" placeholder="Enter Bucket Item Here!"></textarea>
-				</div>
-
-				<div class="col-xs-3 button">
-					<button type="submit" class="btn btn-lg">Add to Your List</button>
-				</div>
-			</form>
-		</div>
-	</div>
-	<div class="col-sm-8 col-sm-offset-2">
-	</div>
-	</div>
-	</div>
-	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-8 col-sm-offset-2">
-				<h2>Bucketlist</h2>
-				<hr>
-				<ul>
-					{{#each bucketitems}}
-						{{# unless this.isAchieved}}
-							<form method="get" action="/api/title/{{this.id}}">
-								<li>
-									<p><span class="label">Title :</span> {{this.title}}
-										<button class="btn btn-default" type="submit">Mark Done</button>
-									</p>
-
-								</li>
-							</form>
-
-							{{/unless}}
-					{{/each}}
-				</ul>
-			</div>
-			<div id="bucketItem-area"></div>
-		</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
+					   <div class="col-xs-3 button">
+					     <button type="submit" class="btn btn-lg">Add to Your List</button>
+					   </div>
+					 </form>
+         </div>
+       </div>
 </body>
 </html>

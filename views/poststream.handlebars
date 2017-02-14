@@ -5,32 +5,31 @@
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<style>
 		body {
-			padding-top: 80px;
+			padding-top: 20px;
 			word-wrap: break-word;
 		}
 	</style>
 </head>
 
-<body>
+<body class="background">
 	<nav class="navbar">
 					<p>Bucketlist<p>
 					<a href="/about" class="btn btn-default btn-sm menuTop">About</a>
 				  <a href="/contact" class="btn btn-default btn-sm menuTop">Contact</a>
 					<a href="/logout" class="btn btn-default btn-sm menuTop">Logout</a>
+					<a class="btn btn-default btn-sm menuTop" href="/bucketlist">My Bucket List</a>
 
 	</nav>
+	<div class="header1">
+		<h1 class="header1">My Achievements</h1>
+	</div>
 	<div class="container">
-		<div class="page-header text-center">
-
-
-		</div>
 		<div class="col-md-2 col-sm-2">
-			<a class="btn btn-default" href="/bucketlist">My Bucket List</a>
+
 		</div>
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="well">
-					<h1>My Acheivements!</h1>
 					<ul>
 						{{#each bucketitems}}
 							{{# if this.isAchieved}}
