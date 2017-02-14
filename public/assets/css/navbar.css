@@ -1,0 +1,11 @@
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+
+nav .container {
+  font: 100%/1 'Lobster', cursive;
+  font-size: 12em;
+  background: hsla(255, 255%, 255%, 1);
+}
+
+#centerID {
+    text-align: center;
+}
