@@ -1,11 +1,19 @@
 @import url(http://fonts.googleapis.com/css?family=Lobster);
-
-nav .container {
-  font: 100%/1 'Lobster', cursive;
-  font-size: 12em;
-  background: hsla(255, 255%, 255%, 1);
-}
+@import url(https://fonts.googleapis.com/css?family=Raleway:500);
 
 #centerID {
     text-align: center;
+    font: 100%/1 'Lobster', cursive;
+    font-size: 3.5em;
+    background: hsla(255, 255%, 255%, 1);
+}
+
+nav {
+  font: 100%/1 'Lobster', cursive;
+  font-size: 4em;
+}
+
+.menuTop {
+  font: 100%/1 'Raleway:500', cursive;
+  float: right;
 }
