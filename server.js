@@ -9,7 +9,7 @@ var bodyParser = require("body-parser");
 var passport = require('passport');
 var flash    = require('connect-flash');
 var exphbs = require("express-handlebars");
-
+var methodOverride = require("method-override");
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
@@ -47,6 +47,8 @@ app.use(fileUpload());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+// Override with POST having ?_method=DELETE
+app.use(methodOverride("_method"));
 
 // Static directory
  app.use(express.static("./public"));

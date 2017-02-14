@@ -52,7 +52,7 @@ app.get('/bucketlist', isLoggedIn, function(req, res){
 ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
 
-app.put('/bucketlist/:id', function(req, res){
+app.put('/update/:id', function(req, res){
 	BucketItem.update({
 		isAchieved : true
 	},
