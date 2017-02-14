@@ -1,7 +1,6 @@
 <!doctype html>
 <html>
 <head>
-<title>Node Authentication</title>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 <style>
@@ -9,25 +8,33 @@
 </style>
 </head>
 <body>
+  <div class="homepage-hero-module" class="heightadjust">
+
+      <div class="video-container">
+             <div class="filter"></div>
+                  <video autoplay loop class="fillWidth">
+                      <source src="./assets/picsvids/Coverr-Lulu.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+                      <source src="./assets/picsvids/Coverr-Lulu.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+                  </video>
+                  <div class="poster hidden">
+                      <img src="./assets/picsvids/Coverr-Lulu.jpg" alt="Lulu in the Car">
+                  </div>
+
   <nav class="navbar">
+    <a href="/about" class="btn btn-default btn-sm menuTop">About</a>
+    <a href="/contact" class="btn btn-default btn-sm menuTop">Contact</a>
       <div class="container" id="centerID">
-          <p class="animated rollIn">Peer Pressure<p>
+          <p class="animated rollIn">Bucketlist<p>
       </div>
   </nav>
-<div class="container">
+  <div class="col-sm-6 col-sm-offset-3">
+       <h1><span class="fa fa-sign-in"></span>
+<p>Login or Register with:</p>
 
-<div class="text-center">
-
-
-  <p>Login or Register with:</p>
-
-  <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Login</a>
-  <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Signup</a>
-
+<a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Login</a>
+<a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Signup</a>
 </div>
-
-
-
+</div>
 </div>
 </body>
 </html>
